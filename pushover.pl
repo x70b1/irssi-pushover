@@ -29,14 +29,13 @@ sub pushover {
             );
 
             if ($push->is_success) {
-                Irssi::print("Pushover sent to $server->{nick}.");
+                Irssi::print("Pushover message sent.");
+            } else {
+                Irssi::print("A Pushover message failed!");
             }
-            else {
-                Irssi::print("Pushover to $server->{nick} failed!");
-            }
-
 
             $lastmsg = time();
+
         } else {
             $lastmsg = time();
         }
