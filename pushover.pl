@@ -57,7 +57,7 @@ sub push_mention {
 	}
 }
 
-Irssi::settings_add_int( 'pushover', 'pushover_silence', 60 );
+Irssi::settings_add_int( 'pushover', 'pushover_silence', 20 );
 Irssi::settings_add_str( 'pushover', 'pushover_screensession', '' );
 Irssi::settings_add_str( 'pushover', 'pushover_apptoken',      '' );
 Irssi::settings_add_str( 'pushover', 'pushover_usertoken',     '' );
