@@ -1,5 +1,6 @@
 use Irssi;
 use vars qw($VERSION %IRSSI);
+use LWP::UserAgent;
 
 $VERSION = "1.0";
 
@@ -17,7 +18,24 @@ sub pushover {
 
     if ( !$screen ) {
         if ( ( $lastmsg + Irssi::settings_get_int('pushover_silence') ) < time() ) {
-            system("curl -sf --form-string token='".Irssi::settings_get_str('pushover_apptoken')."' --form-string user='".Irssi::settings_get_str('pushover_usertoken')."' --form-string title='$title' --form-string message='$message' https://api.pushover.net/1/messages.json >> /dev/null");
+
+            my $push = LWP::UserAgent->new()->post(
+                'https://api.pushover.net/1/messages.json', [
+                    user => Irssi::settings_get_str('pushover_usertoken'),
+                    token => Irssi::settings_get_str('pushover_apptoken'),
+                    title => $title,
+                    message => $message
+                ]
+            );
+
+            if ($push->is_success) {
+                Irssi::print("Pushover sent to $server->{nick}.");
+            }
+            else {
+                Irssi::print("Pushover to $server->{nick} failed!");
+            }
+
+
             $lastmsg = time();
         } else {
             $lastmsg = time();
