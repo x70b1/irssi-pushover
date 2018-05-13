@@ -1,3 +1,6 @@
+use strict;
+use warnings;
+
 use Irssi;
 use vars qw($VERSION %IRSSI);
 use LWP::UserAgent;
@@ -40,6 +43,8 @@ sub pushover {
 		} else {
 			$lastmsg = time();
 		}
+
+		return;
 	}
 }
 
@@ -47,6 +52,8 @@ sub push_message {
 	my ( $server, $msg, $nick, $address, $target ) = @_;
 
 	pushover( "/msg $nick", "Ping!" );
+
+	return;
 }
 
 sub push_mention {
@@ -55,6 +62,8 @@ sub push_mention {
 	if ( index( $msg, $server->{nick} ) != -1 ) {
 		pushover( "$target", "$nick: $msg" );
 	}
+
+	return;
 }
 
 Irssi::settings_add_int( 'pushover', 'pushover_silence', 20 );
