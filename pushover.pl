@@ -14,6 +14,13 @@ $VERSION = "1.0";
 	url         => 'https://github.com/x70b1/irssi-pushover',
 );
 
+Irssi::settings_add_int( 'pushover', 'pushover_silence', 20 );
+Irssi::settings_add_str( 'pushover', 'pushover_screensession', '' );
+Irssi::settings_add_str( 'pushover', 'pushover_apptoken',      '' );
+Irssi::settings_add_str( 'pushover', 'pushover_usertoken',     '' );
+
+my $lastmsg = time() - Irssi::settings_get_int('pushover_silence');
+
 sub pushover {
 	my ( $title, $message ) = @_;
 
@@ -65,13 +72,6 @@ sub push_mention {
 
 	return;
 }
-
-Irssi::settings_add_int( 'pushover', 'pushover_silence', 20 );
-Irssi::settings_add_str( 'pushover', 'pushover_screensession', '' );
-Irssi::settings_add_str( 'pushover', 'pushover_apptoken',      '' );
-Irssi::settings_add_str( 'pushover', 'pushover_usertoken',     '' );
-
-my $lastmsg = time() - Irssi::settings_get_int('pushover_silence');
 
 Irssi::signal_add_last( 'message private', 'push_message' );
 Irssi::signal_add_last( 'message public',  'push_mention' );
