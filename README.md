@@ -1,5 +1,8 @@
 # irssi-pushover
 
+[![GitHub contributors](https://img.shields.io/github/contributors/x70b1/irssi-pushover.svg)](https://github.com/x70b1/irssi-pushover/graphs/contributors)
+[![license](https://img.shields.io/github/license/x70b1/irssi-pushover.svg)](https://github.com/x70b1/irssi-pushover/blob/master/LICENSE)
+
 This script sends a message with Pushover if no one is attached to a given screen.
 
 
